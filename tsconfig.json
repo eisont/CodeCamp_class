@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    // 어떤 버전을 사용할 것인가?
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    // 엄격하게 사용할 것인가? Yes === True
+    // 엄격하게 사용할 것인가? No === False
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve"
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+    // ** 모든 폴더를 의미합니다.
+    // 끝에만 .ts, .tsx인 파일들 들어가서 typescript를 검사할 것입니다.
+  ],
+  // typescript를 제외할 폴더
+  "exclude": ["node_modules"]
+}
