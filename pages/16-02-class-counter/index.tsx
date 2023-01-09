@@ -1,10 +1,11 @@
-import { Component } from "react";
+import { Component } from 'react';
 
 interface IState {
   count: number;
 }
 
 export default class CounterPage extends Component {
+  // Component 에서 제공하는 기능
   state = {
     count: 0,
   };
@@ -17,6 +18,7 @@ export default class CounterPage extends Component {
     }));
   };
 
+  // Component 에서 제공하는 기능
   render() {
     return (
       <div>

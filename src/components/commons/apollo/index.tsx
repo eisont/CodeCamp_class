@@ -1,18 +1,25 @@
-import {
-  ApolloClient,
-  ApolloLink,
-  ApolloProvider,
-  InMemoryCache,
-} from "@apollo/client";
-import { onError } from "@apollo/client/link/error";
-import { createUploadLink } from "apollo-upload-client";
-import { useEffect } from "react";
-import { useRecoilState } from "recoil";
+import { ApolloClient, ApolloLink, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { onError } from '@apollo/client/link/error';
+import { createUploadLink } from 'apollo-upload-client'; // 이미지를 올리기 위해서 필요한 라이브러리, 19강
+import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
 import {
   accessTokenState,
   //  userInfoState
-} from "../../../../src/commons/store";
-import { getAccessToken } from "../../../commons/libraries/getAccessToken";
+} from '../../../../src/commons/store';
+import { getAccessToken } from '../../../commons/libraries/getAccessToken';
+import { initializeApp } from 'firebase/app';
+
+const firebaseConfig = {
+  apikey: 'AIzaSyAglw0=9qEenZ6c7Zism7Psr1a6qnGjMalJE',
+  authDomain: 'mysite222-16104.firebaseapp.com',
+  projectId: 'mysite222-16104',
+  storageBucket: 'mysite222-16104.appspot.com',
+  messagingSenderId: '7943492381219',
+  appId: '1:794349238219:web:652a5e3220933ef0a6684e',
+};
+
+export const firebaseApp = initializeApp(firebaseConfig);
 
 export default function ApolloSetting(props: any) {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
@@ -25,12 +32,12 @@ export default function ApolloSetting(props: any) {
   // }else{}
 
   // 2. 두번째 방법!!!
-  if (typeof window !== "undefined") {
-    console.log("여기는 브라우저다!!!");
+  if (typeof window !== 'undefined') {
+    console.log('여기는 브라우저다!!!');
     // const mylocalstorageAccessToken = localStorage.getItem("accessToken");
     // setAccessToken(mylocalstorageAccessToken || "");
   } else {
-    console.log("여기는 프론트엔드 서버다!!!(yarn dev 다!!!)");
+    console.log('여기는 프론트엔드 서버다!!!(yarn dev 다!!!)');
   }
 
   // 3. 세번째 방법!!!
@@ -61,7 +68,7 @@ export default function ApolloSetting(props: any) {
     if (graphQLErrors) {
       for (const err of graphQLErrors) {
         // 1-2. 해당 에러가 토큰만료 에러인지 체크 === UNAUTHENTICATED
-        if (err.extensions.code === "UNAUTHENTICATED") {
+        if (err.extensions.code === 'UNAUTHENTICATED') {
           // 2-1. refreshToken으로 accessToken을 재발급 받기
           // getAccessToken을 then해서 받아오기
           getAccessToken().then((newAccessToken) => {
@@ -93,16 +100,20 @@ export default function ApolloSetting(props: any) {
     }
   });
 
+  // 4강, 19강
+  // 이렇게 변수에 따로 담아서 넣는 방법으로 확장시킵니다.
   const uploadLink = createUploadLink({
-    uri: "http://backend06.codebootcamp.co.kr/graphql",
+    uri: 'https://backend06.codebootcamp.co.kr/graphql',
     headers: { Authorization: `Bearer ${accessToken}` },
     // 중요한 정보를 포함 시킬것이냐? (include)
     // 이것을 해야 쿠키에 refreshToken이 들어갑니다.
-    credentials: "include",
+    credentials: 'include',
   });
 
   const client = new ApolloClient({
+    // from([])안에 대괄호로 넣어야 합니다.
     link: ApolloLink.from([errorLink, uploadLink]),
+    // cache를 변수에 저장을 하겠습니다. 메모리에 저장하면 브라우저를 껐다 키면 사라집니다.
     cache: new InMemoryCache(),
   });
 

@@ -1,15 +1,15 @@
-import "antd/dist/antd.css";
+import 'antd/dist/antd.css';
 // import "../styles/globals.css";
 
-import { AppProps } from "next/app";
-import Layout from "../src/components/commons/layout";
-import { Global } from "@emotion/react";
-import { globalStyles } from "../src/commons/styles/globalStyles";
+import { AppProps } from 'next/app';
+import Layout from '../src/components/commons/layout';
+import { Global } from '@emotion/react';
+import { globalStyles } from '../src/commons/styles/globalStyles';
 
 // Import the functions you need from the SDKs you need
 // import { initializeApp } from "firebase/app";
-import { RecoilRoot } from "recoil";
-import ApolloSetting from "../src/components/commons/apollo";
+import { RecoilRoot } from 'recoil';
+import ApolloSetting from '../src/components/commons/apollo';
 // import Head from "next/head";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -36,11 +36,12 @@ function MyApp({ Component, pageProps }: AppProps) {
           src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5c7f2a4ed139b34fb703d663cc6f45a2"
         ></script>
       </Head> */}
+      {/* recoil을 사용하기 위한 설정 */}
       <RecoilRoot>
         <ApolloSetting>
           <Global styles={globalStyles} />
           <Layout>
-            {/* <Component {...pageProps} /> */}
+            {/* 여기서 말하는 Component는 우리가 만들어둔 페이지 함수형 컴포넌트를 의미합니다. */}
             <Component {...pageProps} />
           </Layout>
         </ApolloSetting>

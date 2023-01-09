@@ -1,11 +1,8 @@
-import { gql, useMutation } from "@apollo/client";
-import { Modal } from "antd";
-import { ChangeEvent, useRef, useState } from "react";
-import { checkFileValidation } from "../../src/commons/libraries/validation";
-import {
-  IMutation,
-  IMutationUploadFileArgs,
-} from "../../src/commons/types/generated/types";
+import { gql, useMutation } from '@apollo/client';
+import { Modal } from 'antd';
+import { ChangeEvent, useRef, useState } from 'react';
+import { checkFileValidation } from '../../src/commons/libraries/validation';
+import { IMutation, IMutationUploadFileArgs } from '../../src/commons/types/generated/types';
 
 const UPLOAD_FILE = gql`
   mutation uploadFile($file: Upload!) {
@@ -17,14 +14,10 @@ const UPLOAD_FILE = gql`
 
 export default function ImageValidationPage() {
   const fileRef = useRef<HTMLInputElement>(null);
-  console.log("gkgkgk")
 
-  const [imageUrl, setImageUrl] = useState<string | undefined>("");
+  const [imageUrl, setImageUrl] = useState<string | undefined>('');
 
-  const [uploadFile] = useMutation<
-    Pick<IMutation, "uploadFile">,
-    IMutationUploadFileArgs
-  >(UPLOAD_FILE);
+  const [uploadFile] = useMutation<Pick<IMutation, 'uploadFile'>, IMutationUploadFileArgs>(UPLOAD_FILE);
 
   const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
     // const file = event.target.files && event?.target.files[0] // 값이 있다면 file[0]을 보여줘
@@ -48,30 +41,28 @@ export default function ImageValidationPage() {
   const onClickImage = () => {
     fileRef.current?.click();
   };
-  //
-  //
 
   return (
     <>
       <div>이미지 업로드 연습하기</div>
       <div
         style={{
-          width: "150px",
-          height: "150px",
-          backgroundColor: "skyblue",
-          fontSize: "0",
-          borderRadius: "50%",
-          cursor: "pointer",
+          width: '150px',
+          height: '150px',
+          backgroundColor: 'skyblue',
+          fontSize: '0',
+          borderRadius: '50%',
+          cursor: 'pointer',
         }}
         onClick={onClickImage}
       >
         이미지선택
       </div>
       <input
-        style={{ display: "none" }}
-        type="file"
+        style={{ display: 'none' }}
+        type='file'
         onChange={onChangeFile}
-        ref={fileRef}
+        ref={fileRef} // 우리가 만든 div 박스와 연결
       />
       <img src={`https://storage.googleapis.com/${imageUrl}`} />
     </>

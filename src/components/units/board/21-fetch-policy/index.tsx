@@ -1,4 +1,4 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql, useQuery } from '@apollo/client';
 
 const FETCH_BOARDS = gql`
   query fetchBoards {
@@ -20,7 +20,7 @@ export default function FetchPolicyTest() {
 
   return (
     <div>
-      {data?.fetchBoards?.map((el) => (
+      {data?.fetchBoards?.map((el: any) => (
         <div key={el._id}>{el.title}</div>
       ))}
     </div>
