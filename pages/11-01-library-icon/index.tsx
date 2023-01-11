@@ -1,5 +1,5 @@
-import { AppleOutlined } from "@ant-design/icons";
-import styled from "@emotion/styled";
+import { AppleOutlined } from '@ant-design/icons';
+import styled from '@emotion/styled';
 
 const MyIcon = styled(AppleOutlined)`
   font-size: 50px;
@@ -10,7 +10,9 @@ const MyIcon = styled(AppleOutlined)`
   // 색상 === color
 `;
 
-export default function LibraryIconPage() {
+const LibraryIconPage = () => {
   // return <AppleOutlined />;
   return <MyIcon />;
-}
+};
+
+export default LibraryIconPage;

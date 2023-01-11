@@ -1,6 +1,6 @@
-import Board from "../../src/components/units/board/14-lifting-pagination/Board";
-import Pagination from "../../src/components/units/board/14-lifting-pagination/Pagination";
-import { gql, useQuery } from "@apollo/client";
+import Board from '../../src/components/units/board/14-lifting-pagination/Board';
+import Pagination from '../../src/components/units/board/14-lifting-pagination/Pagination';
+import { gql, useQuery } from '@apollo/client';
 
 const FETCH_BOARDS = gql`
   query fetchBoards($page: Int) {
@@ -19,7 +19,7 @@ const FETCH_BOARDS_COUNT = gql`
   }
 `;
 
-export default function MapBoardPage() {
+const MapBoardPage = () => {
   const { data, refetch } = useQuery(FETCH_BOARDS);
 
   const { data: dataBoardsCount } = useQuery(FETCH_BOARDS_COUNT);
@@ -31,4 +31,6 @@ export default function MapBoardPage() {
       <Pagination refetch={refetch} lastPage={lastPage} />
     </>
   );
-}
+};
+
+export default MapBoardPage;

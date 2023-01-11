@@ -1,8 +1,7 @@
 import { useMutation, gql } from '@apollo/client';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 // graphql 담는 부분
-
 const CREATE_BOARD = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!) {
     createBoard(createBoardInput: $createBoardInput) {
@@ -26,8 +25,7 @@ const CREATE_BOARD = gql`
 `;
 
 // 04-05-graphql-mutation-input 리펙토링
-
-export default function GraphqlMutationPage() {
+const GraphqlMutationPage = () => {
   const [inputs, setInputs] = useState({
     writer: '',
     title: '',
@@ -45,7 +43,6 @@ export default function GraphqlMutationPage() {
   };
 
   // ========================================================
-
   // const onChangeWriter = (event: any) => {
   //   setInputs({
   //     writer: inputs.writer,
@@ -91,14 +88,14 @@ export default function GraphqlMutationPage() {
 
   // ========================================================
 
-  const onChangeInputs = (event: any) => {
+  const onChangeInputs = (event: ChangeEvent<HTMLInputElement>) => {
     setInputs({
       ...inputs,
       [event.target.id]: event.target.value,
     });
   };
   // event.target.id를 바로 key로 사용할 수 없습니다. event{target{id}} 이기 때문에
-  // [] (대괄호)로 감싸줘야 합니다.
+  // [] (대괄호)로 감싸줘야 합니다. 이유는 event:{target:{id }}처럼 생겼기 때문입니다.
 
   return (
     <>
@@ -112,4 +109,6 @@ export default function GraphqlMutationPage() {
       <button onClick={callGraphqlApi}>GRAPHQL-API 요청하기!!!</button>
     </>
   );
-}
+};
+
+export default GraphqlMutationPage;

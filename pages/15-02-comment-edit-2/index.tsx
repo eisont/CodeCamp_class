@@ -1,6 +1,6 @@
-import { useQuery, gql } from "@apollo/client";
-import styled from "@emotion/styled";
-import { useState } from "react";
+import styled from '@emotion/styled';
+import { useQuery, gql } from '@apollo/client';
+import { useState } from 'react';
 
 const FETCH_BOARDS = gql`
   query fetchBoards {
@@ -21,19 +21,9 @@ const MyColumn = styled.div`
   width: 25%;
 `;
 
-export default function MapBoardPage() {
+const MapBoardPage = () => {
   const { data } = useQuery(FETCH_BOARDS);
-  const [myIndex, setMyIndex] = useState([
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-  ]);
+  const [myIndex, setMyIndex] = useState([false, false, false, false, false, false, false, false, false]);
 
   const onClickEdit = (event: any) => {
     const aaa = myIndex;
@@ -48,7 +38,7 @@ export default function MapBoardPage() {
           {myIndex[index] === false && (
             <MyRow>
               <MyColumn>
-                <input type="checkbox" />
+                <input type='checkbox' />
               </MyColumn>
               <MyColumn>{el._id}</MyColumn>
               <MyColumn>{el.writer}</MyColumn>
@@ -63,4 +53,6 @@ export default function MapBoardPage() {
       ))}
     </>
   );
-}
+};
+
+export default MapBoardPage;

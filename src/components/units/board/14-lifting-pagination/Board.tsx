@@ -1,4 +1,5 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
+import { IQuery } from '../../../../commons/types/generated/types';
 
 const MyRow = styled.div`
   display: flex;
@@ -9,7 +10,11 @@ const MyColumn = styled.div`
   width: 25%;
 `;
 
-export default function Board(props) {
+interface IProps {
+  data: Pick<IQuery, 'fetchBoards'>;
+}
+
+const Board = (props: IProps) => {
   return (
     <div>
       {props.data?.fetchBoards.map((el) => (
@@ -20,4 +25,6 @@ export default function Board(props) {
       ))}
     </div>
   );
-}
+};
+
+export default Board;

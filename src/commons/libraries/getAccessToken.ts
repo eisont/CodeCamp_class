@@ -1,6 +1,6 @@
 // apollo 없이 graphql을 axios 형태로 사용하기 위한 라이브러리
 // graphql 은 restApi로 만들어졌습니다.
-import { GraphQLClient, gql } from "graphql-request";
+import { GraphQLClient, gql } from 'graphql-request';
 
 const RESTORE_ACCESS_TOKEN = gql`
   mutation restoreAccessToken {
@@ -15,8 +15,8 @@ export async function getAccessToken() {
   // 실패할수도 있다. try catch로 잡겠다.
   try {
     // https로 변경을 해야 합니다.
-    const graphQLClient = new GraphQLClient("http://backend06.codebootcamp.co.kr/graphql", {
-      credentials: "include",
+    const graphQLClient = new GraphQLClient('https://backend09.codebootcamp.co.kr/graphql', {
+      credentials: 'include',
     });
 
     // useMutation === apolloclient 세팅이 완료하해야 사용이 가능합니다.

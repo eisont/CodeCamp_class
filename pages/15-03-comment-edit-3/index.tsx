@@ -1,5 +1,5 @@
-import { useQuery, gql } from "@apollo/client";
-import BoardCommentItem from "../../src/components/units/board/15-board-comment";
+import { useQuery, gql } from '@apollo/client';
+import BoardCommentItem from '../../src/components/units/board/15-board-comment';
 
 const FETCH_BOARDS = gql`
   query fetchBoards {
@@ -12,7 +12,7 @@ const FETCH_BOARDS = gql`
   }
 `;
 
-export default function MapBoardPage() {
+const MapBoardPage = () => {
   const { data } = useQuery(FETCH_BOARDS);
   return (
     <>
@@ -21,4 +21,6 @@ export default function MapBoardPage() {
       ))}
     </>
   );
-}
+};
+
+export default MapBoardPage;

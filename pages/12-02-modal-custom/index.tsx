@@ -1,9 +1,9 @@
-import { Modal, Button } from "antd";
-import { useState } from "react";
+import { Modal, Button } from 'antd';
+import { ChangeEvent, useState } from 'react';
 
-export default function ModalCustomPage() {
+const ModalCustomPage = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState('');
 
   const showModal = () => {
     setIsOpen(true);
@@ -17,14 +17,14 @@ export default function ModalCustomPage() {
     setIsOpen(false);
   };
 
-  const onChangePassword = (event) => {
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
   };
   console.log(password);
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>
+      <Button type='primary' onClick={showModal}>
         Open Modal
       </Button>
       <Modal
@@ -33,8 +33,10 @@ export default function ModalCustomPage() {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        비밀번호 입력: <input type="password" onChange={onChangePassword} />
+        비밀번호 입력: <input type='password' onChange={onChangePassword} />
       </Modal>
     </>
   );
-}
+};
+
+export default ModalCustomPage;

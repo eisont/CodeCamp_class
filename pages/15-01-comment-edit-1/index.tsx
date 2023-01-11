@@ -1,6 +1,6 @@
-import { useQuery, gql } from "@apollo/client";
-import styled from "@emotion/styled";
-import { useState } from "react";
+import styled from '@emotion/styled';
+import { useQuery, gql } from '@apollo/client';
+import { useState } from 'react';
 
 const FETCH_BOARDS = gql`
   query fetchBoards {
@@ -15,18 +15,17 @@ const FETCH_BOARDS = gql`
 
 const MyRow = styled.div`
   display: flex;
-  // justify-contents: space-between;
 `;
 const MyColumn = styled.div`
   width: 25%;
 `;
 
-export default function MapBoardPage() {
+const MapBoardPage = () => {
   const { data } = useQuery(FETCH_BOARDS);
   const [myIndex, setMyIndex] = useState();
 
   const onClickEdit = (event: any) => {
-    setMyIndex(Number(event.target.id));
+    setMyIndex(event.target.id);
   };
   return (
     <>
@@ -35,7 +34,7 @@ export default function MapBoardPage() {
           {index !== 2 && (
             <MyRow>
               <MyColumn>
-                <input type="checkbox" />
+                <input type='checkbox' />
               </MyColumn>
               <MyColumn>{el._id}</MyColumn>
               <MyColumn>{el.writer}</MyColumn>
@@ -45,9 +44,11 @@ export default function MapBoardPage() {
               </button>
             </MyRow>
           )}
-          {index === myIndex && <div>수정하기화면입니다.</div>}
+          {index === Number(myIndex) && <div>수정하기화면입니다.</div>}
         </div>
       ))}
     </>
   );
-}
+};
+
+export default MapBoardPage;

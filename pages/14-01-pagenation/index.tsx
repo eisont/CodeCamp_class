@@ -1,5 +1,5 @@
-import { useQuery, gql } from "@apollo/client";
-import styled from "@emotion/styled";
+import { useQuery, gql } from '@apollo/client';
+import styled from '@emotion/styled';
 
 const FETCH_BOARDS = gql`
   query fetchBoards($page: Int) {
@@ -14,13 +14,12 @@ const FETCH_BOARDS = gql`
 
 const MyRow = styled.div`
   display: flex;
-  // justify-contents: space-between;
 `;
 const MyColumn = styled.div`
   width: 25%;
 `;
 
-export default function MapBoardPage() {
+const MapBoardPage = () => {
   const { data, refetch } = useQuery(FETCH_BOARDS);
 
   const onClickPage = (event: any) => {
@@ -53,4 +52,6 @@ export default function MapBoardPage() {
       </span> */}
     </>
   );
-}
+};
+
+export default MapBoardPage;

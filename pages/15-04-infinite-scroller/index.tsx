@@ -1,6 +1,6 @@
-import { useQuery, gql } from "@apollo/client";
-import styled from "@emotion/styled";
-import InfiniteScroll from "react-infinite-scroller";
+import { useQuery, gql } from '@apollo/client';
+import styled from '@emotion/styled';
+import InfiniteScroll from 'react-infinite-scroller';
 
 const FETCH_BOARDS = gql`
   query fetchBoards($page: Int) {
@@ -15,7 +15,6 @@ const FETCH_BOARDS = gql`
 
 const MyRow = styled.div`
   display: flex;
-  // justify-contents: space-between;
 `;
 const MyColumn = styled.div`
   width: 25%;
@@ -24,12 +23,12 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 
-export default function MapBoardPage() {
+const MapBoardPage = () => {
   const { data, fetchMore } = useQuery(FETCH_BOARDS);
 
   // 스크롤 시켰을때 함수 실행되는 곳에 작성
   const onLoadMore = () => {
-    if (!data) return;
+    if (!data) return; // infinite scroll은 data가 없을 시에도 로딩이 됩니다. 그렇기에 data가 없을 경우에는 작동 안하게 해줍니다.
 
     // fetchMore === 추가적으로 fetch를 하겠다.
     fetchMore({
@@ -55,12 +54,12 @@ export default function MapBoardPage() {
   };
 
   return (
-    <Wrapper style={{ height: "700px", overflow: "auto" }}>
+    <Wrapper style={{ height: '700px', overflow: 'auto' }}>
       <InfiniteScroll
         pageStart={0}
-        loadMore={onLoadMore}
-        hasMore={true}
-        useWindow={false}
+        loadMore={onLoadMore} // 데이터가 더 있을 경우 onLoadMore 함수를 실행시키겠습니다.
+        hasMore={true} // 데이터가 더 있는지 업는지 확인하는 부분
+        useWindow={false} // 브라우저 전체 스크롤을 사용하겠습니까?
       >
         {data?.fetchBoards.map((el: any) => (
           <MyRow key={el._id}>
@@ -72,4 +71,6 @@ export default function MapBoardPage() {
       </InfiniteScroll>
     </Wrapper>
   );
-}
+};
+
+export default MapBoardPage;

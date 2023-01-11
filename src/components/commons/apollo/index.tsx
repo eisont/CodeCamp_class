@@ -103,7 +103,7 @@ export default function ApolloSetting(props: any) {
   // 4강, 19강
   // 이렇게 변수에 따로 담아서 넣는 방법으로 확장시킵니다.
   const uploadLink = createUploadLink({
-    uri: 'https://backend06.codebootcamp.co.kr/graphql',
+    uri: 'https://backend09.codebootcamp.co.kr/graphql',
     headers: { Authorization: `Bearer ${accessToken}` },
     // 중요한 정보를 포함 시킬것이냐? (include)
     // 이것을 해야 쿠키에 refreshToken이 들어갑니다.

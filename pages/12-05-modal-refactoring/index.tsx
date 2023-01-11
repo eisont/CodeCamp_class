@@ -1,8 +1,8 @@
-import { Modal, Button } from "antd";
-import { useState } from "react";
-import DaumPostcode from "react-daum-postcode";
+import { Modal, Button } from 'antd';
+import { useState } from 'react';
+import DaumPostcode from 'react-daum-postcode';
 
-export default function ModalCustomPage() {
+const ModalCustomPage = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const onToggleModal = () => {
@@ -39,4 +39,6 @@ export default function ModalCustomPage() {
       )}
     </>
   );
-}
+};
+
+export default ModalCustomPage;
