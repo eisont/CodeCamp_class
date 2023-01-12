@@ -1,12 +1,12 @@
-import { useRouter } from "next/router";
-import { useRecoilState } from "recoil";
-import { visitedPageState } from "../../../commons/store";
+import { useRouter } from 'next/router';
+import { useRecoilState } from 'recoil';
+import { visitedPageState } from '../../../commons/store';
 
-export function useMoveToPage() {
+export const useMoveToPage = () => {
   const router = useRouter();
   const [visitedPage, setVisitedPage] = useRecoilState(visitedPageState); // 마지막에 들어갔던 페이지 저장
 
-  const onClickMoveToPage = (path: any) => () => {
+  const onClickMoveToPage = (path: string) => () => {
     setVisitedPage(path);
     router.push(path);
   };
@@ -15,4 +15,4 @@ export function useMoveToPage() {
     visitedPage,
     onClickMoveToPage,
   };
-}
+};

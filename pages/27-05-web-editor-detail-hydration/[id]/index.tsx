@@ -1,6 +1,6 @@
-import { gql, useQuery } from "@apollo/client";
-import { useRouter } from "next/router";
-import Dompurify from "dompurify";
+import { gql, useQuery } from '@apollo/client';
+import { useRouter } from 'next/router';
+import Dompurify from 'dompurify';
 
 const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
@@ -13,7 +13,7 @@ const FETCH_BOARD = gql`
   }
 `;
 
-export default function WebEditorDetailPage() {
+const WebEditorDetailPage = () => {
   const router = useRouter();
 
   const { data } = useQuery(FETCH_BOARD, {
@@ -23,20 +23,22 @@ export default function WebEditorDetailPage() {
 
   return (
     <>
-      <div style={{ color: "red" }}>작성자: {data?.fetchBoard.writer}</div>
-      <div style={{ color: "green" }}>제목: {data?.fetchBoard.title}</div>
+      <div style={{ color: 'red' }}>작성자: {data?.fetchBoard.writer}</div>
+      <div style={{ color: 'green' }}>제목: {data?.fetchBoard.title}</div>
 
-      {typeof window !== "undefined" ? (
+      {typeof window !== 'undefined' ? (
         <div
-          style={{ color: "blue" }}
+          style={{ color: 'blue' }}
           dangerouslySetInnerHTML={{
             __html: Dompurify.sanitize(data?.fetchBoard.contents),
           }}
         ></div>
       ) : (
-        <div style={{ color: "blue" }}></div>
+        <div style={{ color: 'blue' }}></div>
       )}
-      <div style={{ color: "brown" }}>상품가격: </div>
+      <div style={{ color: 'brown' }}>상품가격: </div>
     </>
   );
-}
+};
+
+export default WebEditorDetailPage;

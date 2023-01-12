@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 const Wrapper = styled.div`
   width: 1000px;
@@ -21,6 +21,8 @@ const Wrapper = styled.div`
   }
 `;
 
-export default function ResponsiveDesignPage() {
+const ResponsiveDesignPage = () => {
   return <Wrapper>상자</Wrapper>;
-}
+};
+
+export default ResponsiveDesignPage;

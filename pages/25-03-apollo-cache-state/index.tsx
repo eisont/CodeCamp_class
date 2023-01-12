@@ -1,4 +1,4 @@
-import { gql, useMutation, useQuery } from "@apollo/client";
+import { gql, useMutation, useQuery } from '@apollo/client';
 
 const FETCH_BOARDS = gql`
   query fetchBoards {
@@ -28,7 +28,7 @@ const CREATE_BOARD = gql`
   }
 `;
 
-export default function ApolloCacheStatePage() {
+const ApolloCacheStatePage = () => {
   const [deleteBoard] = useMutation(DELETE_BOARD);
   const [createBoard] = useMutation(CREATE_BOARD);
   const { data } = useQuery(FETCH_BOARDS);
@@ -50,7 +50,7 @@ export default function ApolloCacheStatePage() {
           fields: {
             fetchBoards: (prev, { readField }) => {
               const filteredPrev = prev.filter(
-                (el: any) => readField("_id", el) !== deleteId // el._id가 안되므로, readField에서 꺼내오기
+                (el: any) => readField('_id', el) !== deleteId // el._id가 안되므로, readField에서 꺼내오기
               );
               return [...filteredPrev];
             },
@@ -65,10 +65,10 @@ export default function ApolloCacheStatePage() {
     await createBoard({
       variables: {
         createBoardInput: {
-          writer: "영희",
-          password: "1234",
-          title: "제목입니다~",
-          contents: "내용입니다@@@",
+          writer: '영희',
+          password: '1234',
+          title: '제목입니다~',
+          contents: '내용입니다@@@',
         },
       },
       // update(cache, useQuery 결과){}
@@ -100,7 +100,9 @@ export default function ApolloCacheStatePage() {
       <button onClick={onClickSubmit}>등록하기</button>
     </div>
   );
-}
+};
+
+export default ApolloCacheStatePage;
 
 // 예시
 // 1. 구조분해 할당으로 함수 파라미터 받기

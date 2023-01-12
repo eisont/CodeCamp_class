@@ -1,6 +1,6 @@
-import { useQuery, gql } from "@apollo/client";
-import { useState } from "react";
-import FetchPolicyTest from "../../src/components/units/board/21-fetch-policy";
+import { useQuery, gql } from '@apollo/client';
+import { useState } from 'react';
+import FetchPolicyTest from '../../src/components/units/board/21-fetch-policy';
 
 const FETCH_BOARDS = gql`
   query fetchBoards {
@@ -13,7 +13,7 @@ const FETCH_BOARDS = gql`
   }
 `;
 
-export default function GlobalStatePage() {
+const GlobalStatePage = () => {
   const { data } = useQuery(FETCH_BOARDS);
   const [aaa, setAaa] = useState(false);
 
@@ -23,10 +23,10 @@ export default function GlobalStatePage() {
 
   return (
     <div>
-      <button onClick={onClickAaa}>
-        클릭하면 새로운 컴포넌트가 나타납니다!!
-      </button>
+      <button onClick={onClickAaa}>클릭하면 새로운 컴포넌트가 나타납니다!!</button>
       {aaa && <FetchPolicyTest />}
     </div>
   );
-}
+};
+
+export default GlobalStatePage;

@@ -11,7 +11,7 @@ const RESTORE_ACCESS_TOKEN = gql`
 `;
 
 // 토큰을 얻어오는 함수
-export async function getAccessToken() {
+export const getAccessToken = async () => {
   // 실패할수도 있다. try catch로 잡겠다.
   try {
     // https로 변경을 해야 합니다.
@@ -30,4 +30,4 @@ export async function getAccessToken() {
   } catch (error: any) {
     console.log(error.message);
   }
-}
+};

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default function CallbackPromiseAsyncAwaitPage() {
+const CallbackPromiseAsyncAwaitPage = () => {
   const onClickCaollback = () => {
     const aaa = new XMLHttpRequest();
     aaa.open('get', 'http://numbersapi.com/random?min=1&max=200');
@@ -101,4 +101,6 @@ export default function CallbackPromiseAsyncAwaitPage() {
       <button onClick={onClickAsynvAwait}>AsyncAwait 요청하기!!!</button>
     </>
   );
-}
+};
+
+export default CallbackPromiseAsyncAwaitPage;

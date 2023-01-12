@@ -1,11 +1,8 @@
-import { useMutation, gql } from "@apollo/client";
-import { Modal } from "antd";
-import { ChangeEvent, useRef, useState } from "react";
-import { checkFileValidation } from "../../src/commons/libraries/validation";
-import {
-  IMutation,
-  IMutationUploadFileArgs,
-} from "../../src/commons/types/generated/types";
+import { useMutation, gql } from '@apollo/client';
+import { Modal } from 'antd';
+import { ChangeEvent, useRef, useState } from 'react';
+import { checkFileValidation } from '../../src/commons/libraries/validation';
+import { IMutation, IMutationUploadFileArgs } from '../../src/commons/types/generated/types';
 
 // graphql 담는 부분
 
@@ -28,22 +25,19 @@ const UPLOAD_FILE = gql`
   }
 `;
 
-export default function GraphqlMutationPage() {
+const GraphqlMutationPage = () => {
   const fileRef = useRef<HTMLInputElement>(null);
 
-  const [uploadFile] = useMutation<
-    Pick<IMutation, "uploadFile">,
-    IMutationUploadFileArgs
-  >(UPLOAD_FILE);
+  const [uploadFile] = useMutation<Pick<IMutation, 'uploadFile'>, IMutationUploadFileArgs>(UPLOAD_FILE);
 
-  const [writer, setMyWriter] = useState("");
-  const [password, setMyPassword] = useState("");
-  const [title, setMyTitle] = useState("");
-  const [contents, setMyContents] = useState("");
+  const [writer, setMyWriter] = useState('');
+  const [password, setMyPassword] = useState('');
+  const [title, setMyTitle] = useState('');
+  const [contents, setMyContents] = useState('');
 
-  const [imageUrl, setImageUrl] = useState<string | undefined>("");
+  const [imageUrl, setImageUrl] = useState<string | undefined>('');
 
-  const [data, setData] = useState("");
+  const [data, setData] = useState('');
   const [createBoard] = useMutation(CREATE_BOARD);
 
   const callGraphqlApi = async () => {
@@ -103,35 +97,32 @@ export default function GraphqlMutationPage() {
   return (
     <>
       <div>{data}</div>
-      작성자: <input type="text" onChange={onChangeWriter} />
+      작성자: <input type='text' onChange={onChangeWriter} />
       <br />
-      비밀번호: <input type="password" onChange={onChangePassword} />
+      비밀번호: <input type='password' onChange={onChangePassword} />
       <br />
-      제목: <input type="text" onChange={onChangeTitle} />
+      제목: <input type='text' onChange={onChangeTitle} />
       <br />
-      내용: <input type="text" onChange={onChangeContents} />
+      내용: <input type='text' onChange={onChangeContents} />
       <br />
       <button onClick={callGraphqlApi}>GRAPHQL-API 요청하기!!!</button>
       <div
         style={{
-          width: "150px",
-          height: "150px",
-          backgroundColor: "skyblue",
-          fontSize: "0",
-          borderRadius: "50%",
-          cursor: "pointer",
+          width: '150px',
+          height: '150px',
+          backgroundColor: 'skyblue',
+          fontSize: '0',
+          borderRadius: '50%',
+          cursor: 'pointer',
         }}
         onClick={onClickImage}
       >
         이미지선택
       </div>
-      <input
-        style={{ display: "none" }}
-        type="file"
-        onChange={onChangeFile}
-        ref={fileRef}
-      />
+      <input style={{ display: 'none' }} type='file' onChange={onChangeFile} ref={fileRef} />
       <img src={`https://storage.googleapis.com/${imageUrl}`} />
     </>
   );
-}
+};
+
+export default GraphqlMutationPage;

@@ -2,9 +2,9 @@
 // onClick 이런 함수들을 하나로 모아서 관리할 수 없을까?
 
 // import { useRouter } from "next/router";
-import { useMoveToPage } from "../../src/components/commons/hooks/useMoveToPage";
+import { useMoveToPage } from '../../src/components/commons/hooks/useMoveToPage';
 
-export default function CustomHooksUseMoveTopage() {
+const CustomHooksUseMoveTopage = () => {
   // const router = useRouter();
   // const onClickMoveToPage = (page) => () => {
   //   router.push(page);
@@ -15,9 +15,11 @@ export default function CustomHooksUseMoveTopage() {
 
   return (
     <div>
-      <button onClick={onClickMoveToPage("/board")}>게시판으로 이동</button>
-      <button onClick={onClickMoveToPage("/market")}>마켓으로 이동</button>
-      <button onClick={onClickMoveToPage("/mypage")}>마이페이지로 이동</button>
+      <button onClick={onClickMoveToPage('/board')}>게시판으로 이동</button>
+      <button onClick={onClickMoveToPage('/market')}>마켓으로 이동</button>
+      <button onClick={onClickMoveToPage('/mypage')}>마이페이지로 이동</button>
     </div>
   );
-}
+};
+
+export default CustomHooksUseMoveTopage;

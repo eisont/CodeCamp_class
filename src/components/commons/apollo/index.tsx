@@ -21,7 +21,7 @@ const firebaseConfig = {
 
 export const firebaseApp = initializeApp(firebaseConfig);
 
-export default function ApolloSetting(props: any) {
+const ApolloSetting = (props: any) => {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   // const [, setUserInfo] = useRecoilState(userInfoState);
 
@@ -118,4 +118,6 @@ export default function ApolloSetting(props: any) {
   });
 
   return <ApolloProvider client={client}>{props.children}</ApolloProvider>;
-}
+};
+
+export default ApolloSetting;

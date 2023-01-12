@@ -1,5 +1,7 @@
-import GlobalStatePresenter from "./BoardWrite.presenter";
+import GlobalStatePresenter from './BoardWrite.presenter';
 
-export default function GlobalStateContainer() {
+const GlobalStateContainer = () => {
   return <GlobalStatePresenter />;
-}
+};
+
+export default GlobalStateContainer;

@@ -1,6 +1,6 @@
-import { gql, useQuery } from "@apollo/client";
-import { useRouter } from "next/router";
-import Dompurify from "dompurify";
+import { gql, useQuery } from '@apollo/client';
+import { useRouter } from 'next/router';
+import Dompurify from 'dompurify';
 
 const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
@@ -13,7 +13,7 @@ const FETCH_BOARD = gql`
   }
 `;
 
-export default function WebEditorDetailPage() {
+const WebEditorDetailPage = () => {
   const router = useRouter();
 
   const { data } = useQuery(FETCH_BOARD, {
@@ -29,7 +29,7 @@ export default function WebEditorDetailPage() {
       {/* <div>내용: {data?.fetchBoard.contents}</div> */}
 
       {/* window가 아닐때 보여줘 === 브라우저일때 보여줘 */}
-      {typeof window !== "undefined" && (
+      {typeof window !== 'undefined' && (
         <div
           dangerouslySetInnerHTML={{
             __html: Dompurify.sanitize(data?.fetchBoard.contents),
@@ -38,4 +38,6 @@ export default function WebEditorDetailPage() {
       )}
     </>
   );
-}
+};
+
+export default WebEditorDetailPage;

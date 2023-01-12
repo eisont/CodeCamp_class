@@ -1,5 +1,5 @@
 // import Head from "next/head";
-import { useEffect } from "react";
+import { useEffect } from 'react';
 // Head에 집어넣게 되면 html head 부분에 들어가게 되고, 먼저 실행
 // import Script from "next/script";
 // Script 부분에 넣으면 html script 부분에 들어갑니다. body에 들어가서 나중에 실행
@@ -8,11 +8,10 @@ declare const window: typeof globalThis & {
   kakao: any;
 };
 
-export default function KakaoMapPage() {
+const KakaoMapPage = () => {
   useEffect(() => {
-    const script = document.createElement("script"); // <script></script>
-    script.src =
-      "//dapi.kakao.com/v2/maps/sdk.js?appkey=5c7f2a4ed139b34fb703d663cc6f45a2&autoload=false";
+    const script = document.createElement('script'); // <script></script>
+    script.src = '//dapi.kakao.com/v2/maps/sdk.js?appkey=5c7f2a4ed139b34fb703d663cc6f45a2&autoload=false';
     // ? & === 쿼리스트링
     document.head.appendChild(script);
 
@@ -21,7 +20,7 @@ export default function KakaoMapPage() {
       // .onload === ~라는 함수를 내가 다시 재정의한다!!!
       window.kakao.maps.load(function () {
         // map을 돌리고 실행할게요.
-        const container = document.getElementById("map"); // 지도를 담을 영역의 DOM 레퍼런스
+        const container = document.getElementById('map'); // 지도를 담을 영역의 DOM 레퍼런스
         const options = {
           // 지도를 생성할 때 필요한 기본 옵션
           // window.kakao === window에서 kakao를 찾게끔 만들어줬습니다.
@@ -43,9 +42,11 @@ export default function KakaoMapPage() {
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5c7f2a4ed139b34fb703d663cc6f45a2"
       ></script>
     </Head> */}
-      <div id="map" style={{ width: 500, height: 400 }}></div>
+      <div id='map' style={{ width: 500, height: 400 }}></div>
     </>
   );
-}
+};
 
 // js key === 5c7f2a4ed139b34fb703d663cc6f45a2
+
+export default KakaoMapPage;

@@ -12,7 +12,7 @@ const UPLOAD_FILE = gql`
   }
 `;
 
-export default function ImageValidationPage() {
+const ImageValidationPage = () => {
   const [imageUrl, setImageUrl] = useState<string | undefined>('');
 
   const [uploadFile] = useMutation<Pick<IMutation, 'uploadFile'>, IMutationUploadFileArgs>(UPLOAD_FILE);
@@ -43,4 +43,6 @@ export default function ImageValidationPage() {
       <img src={`https://storage.googleapis.com/${imageUrl}`} />
     </>
   );
-}
+};
+
+export default ImageValidationPage;

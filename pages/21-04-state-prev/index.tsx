@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-export default function StatePrevPage() {
+const StatePrevPage = () => {
   const [count, setCount] = useState(0);
 
   const onClickCounter = () => {
@@ -25,4 +25,6 @@ export default function StatePrevPage() {
       <button onClick={onClickCounter}>카운트증가!!!</button>
     </div>
   );
-}
+};
+
+export default StatePrevPage;

@@ -1,7 +1,7 @@
-import { memo } from "react";
+import { memo } from 'react';
 
-function MemoizationPresenterPage() {
-  console.log("프리젠터가 렌더링 됩니다!!!!");
+const MemoizationPresenterPage = () => {
+  console.log('프리젠터가 렌더링 됩니다!!!!');
 
   return (
     <>
@@ -10,7 +10,7 @@ function MemoizationPresenterPage() {
       <div>==========================</div>
     </>
   );
-}
+};
 
 export default memo(MemoizationPresenterPage);
 // 이 놈을 메모해서 사용하겠습니다.

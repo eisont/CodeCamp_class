@@ -12,7 +12,7 @@ const UPLOAD_FILE = gql`
   }
 `;
 
-export default function ImageValidationPage() {
+const ImageValidationPage = () => {
   const fileRef = useRef<HTMLInputElement>(null);
 
   const [imageUrl, setImageUrl] = useState<string | undefined>('');
@@ -67,4 +67,6 @@ export default function ImageValidationPage() {
       <img src={`https://storage.googleapis.com/${imageUrl}`} />
     </>
   );
-}
+};
+
+export default ImageValidationPage;

@@ -1,37 +1,37 @@
-export default function BrowserStoragePage() {
+const BrowserStoragePage = () => {
   const onClickSaveCookie = () => {
     // cookies 저장하는 방법
-    document.cookie = "aaa=철수";
-    document.cookie = "zzz=맹구";
+    document.cookie = 'aaa=철수';
+    document.cookie = 'zzz=맹구';
   };
 
   const onClickSaveLocal = () => {
     // local 저장하는 방법
-    localStorage.setItem("bbb", "영희");
+    localStorage.setItem('bbb', '영희');
   };
 
   const onClickSaveSession = () => {
-    sessionStorage.setItem("ccc", "훈이");
+    sessionStorage.setItem('ccc', '훈이');
   };
 
   const onClickLoadCookie = () => {
     // cookies 꺼내오는 방법
     const myCookie = document.cookie
-      .split("; ")
-      .filter((el) => el.startsWith("aaa="))[0]
-      .replace("aaa=", "");
+      .split('; ')
+      .filter((el) => el.startsWith('aaa='))[0]
+      .replace('aaa=', '');
     console.log(myCookie);
   };
 
   const onClickLoadLocal = () => {
     // local 꺼내오는 방법
-    const bbb = localStorage.getItem("bbb");
+    const bbb = localStorage.getItem('bbb');
     console.log(bbb);
   };
 
   const onClickLoadSession = () => {
     // session 꺼내오는 방법
-    const ccc = sessionStorage.getItem("ccc");
+    const ccc = sessionStorage.getItem('ccc');
     console.log(ccc);
   };
 
@@ -47,4 +47,6 @@ export default function BrowserStoragePage() {
       <button onClick={onClickLoadSession}>세션 조회</button>
     </div>
   );
-}
+};
+
+export default BrowserStoragePage;

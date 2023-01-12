@@ -1,9 +1,16 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 const Button = styled.button`
-  background-color: ${(props) => (props.isActive ? "yellow" : "")};
+  background-color: ${(props: IProps) => (props.isActive ? 'yellow' : '')};
 `;
 
-export default function Button01(props) {
-  return <Button isActive={props.isActive}>{props.title}</Button>;
+interface IProps {
+  isActive?: boolean;
+  title?: string;
 }
+
+const Button01 = (props: IProps) => {
+  return <Button isActive={props.isActive}>{props.title}</Button>;
+};
+
+export default Button01;

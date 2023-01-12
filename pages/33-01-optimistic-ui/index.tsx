@@ -1,4 +1,4 @@
-import { useQuery, gql, useMutation } from "@apollo/client";
+import { useQuery, gql, useMutation } from '@apollo/client';
 
 const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
@@ -15,9 +15,9 @@ const LIKE_BOARD = gql`
   }
 `;
 
-export default function OptimisticUIPage() {
+const OptimisticUIPage = () => {
   const { data } = useQuery(FETCH_BOARD, {
-    variables: { boardId: "6269ecf7a8255b002988d65e" }, // 어떤 boardId인지 확인
+    variables: { boardId: '6269ecf7a8255b002988d65e' }, // 어떤 boardId인지 확인
   });
   console.log(data);
 
@@ -26,7 +26,7 @@ export default function OptimisticUIPage() {
   const onClickOtimisticUI = () => {
     likeBoard({
       // likeBoard 함수 실행
-      variables: { boardId: "6269ecf7a8255b002988d65e" }, // 이 아이디를 가진 게시글 like가 1 증가합니다.
+      variables: { boardId: '6269ecf7a8255b002988d65e' }, // 이 아이디를 가진 게시글 like가 1 증가합니다.
 
       // 1. refetchQueries 방법 === response 두번한다.???
       // 이것은 db에서 받아오기 때문에 엄청 느립니다. (느린 3g로 확인 가능)
@@ -56,12 +56,12 @@ export default function OptimisticUIPage() {
         // cache를 직접 수정한다.
         cache.writeQuery({
           query: FETCH_BOARD, // FETCH_BOARD를 직접 바꿔치기한다. 조작한다.
-          variables: { boardId: "6269ecf7a8255b002988d65e" },
+          variables: { boardId: '6269ecf7a8255b002988d65e' },
           data: {
             fetchBoard: {
               // _id, __typename 필수 입력사항입니다. 적지 않으면 오류!!!!
-              _id: "6269ecf7a8255b002988d65e",
-              __typename: "Board",
+              _id: '6269ecf7a8255b002988d65e',
+              __typename: 'Board',
               // likeCount: 10,   // likeCount 를 우리가 강제로 조작합니다. 예를 들어 7이였다면 이 코드를 작성해서 10으로 변경합니다.
               likeCount: data.likeBoard, // 하드코딩하지 않고 데이터를 받아서 연결합니다.
             },
@@ -78,4 +78,6 @@ export default function OptimisticUIPage() {
       <button onClick={onClickOtimisticUI}>좋아요 올리기!!!</button>
     </>
   );
-}
+};
+
+export default OptimisticUIPage;

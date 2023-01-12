@@ -1,12 +1,12 @@
-import "react-quill/dist/quill.snow.css";
-import dynamic from "next/dynamic";
-import { useRouter } from "next/router";
+import 'react-quill/dist/quill.snow.css';
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 
 // reacthookform을 사용하겠습니다.
-import { useForm } from "react-hook-form";
-import { gql, useMutation } from "@apollo/client";
+import { useForm } from 'react-hook-form';
+import { gql, useMutation } from '@apollo/client';
 
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 const CREATE_BOARD = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!) {
@@ -19,19 +19,19 @@ const CREATE_BOARD = gql`
   }
 `;
 
-export default function WebEditorPage() {
+const WebEditorPage = () => {
   const router = useRouter();
 
   const { register, handleSubmit, setValue, trigger } = useForm({
-    mode: "onChange",
+    mode: 'onChange',
   });
 
   const onChangeContents = (value: string) => {
     console.log(value);
 
-    setValue("contents", value === "<p><br></p>" ? "" : value);
+    setValue('contents', value === '<p><br></p>' ? '' : value);
 
-    trigger("contents");
+    trigger('contents');
   };
 
   const [createBoard] = useMutation(CREATE_BOARD);
@@ -42,7 +42,7 @@ export default function WebEditorPage() {
 
     // 모두 없을때!!!
     if (!(data.writer && data.password && data.title && data.contents)) {
-      alert("모두 입력해 주세요!");
+      alert('모두 입력해 주세요!');
       return;
     }
     // mutation
@@ -68,15 +68,17 @@ export default function WebEditorPage() {
   return (
     // reacthookform을 사용하고 있기 때문에 handleSubmit을 사용해서 감싸줍니다.
     <form onSubmit={handleSubmit(onclickSubmit)}>
-      작성자: <input type="text" {...register("writer")} />
+      작성자: <input type='text' {...register('writer')} />
       <br />
-      비밀번호: <input type="password" {...register("password")} />
+      비밀번호: <input type='password' {...register('password')} />
       <br />
-      제목: <input type="text" {...register("title")} />
+      제목: <input type='text' {...register('title')} />
       <br />
-      내용: <ReactQuill theme="snow" onChange={onChangeContents} />
+      내용: <ReactQuill theme='snow' onChange={onChangeContents} />
       <br />
       <button>등록하기</button>
     </form>
   );
-}
+};
+
+export default WebEditorPage;

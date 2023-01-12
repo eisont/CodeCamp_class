@@ -7,7 +7,7 @@ import { Global } from '@emotion/react';
 import { globalStyles } from '../src/commons/styles/globalStyles';
 
 // Import the functions you need from the SDKs you need
-// import { initializeApp } from "firebase/app";
+import { initializeApp } from 'firebase/app';
 import { RecoilRoot } from 'recoil';
 import ApolloSetting from '../src/components/commons/apollo';
 // import Head from "next/head";
@@ -15,19 +15,19 @@ import ApolloSetting from '../src/components/commons/apollo';
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-// const firebaseConfig = {
-//   apiKey: "AIzaSyAglw9qEenZ6c7Zism7Psr1a6qnGjMalJE",
-//   authDomain: "mysite222-16104.firebaseapp.com",
-//   projectId: "mysite222-16104",
-//   storageBucket: "mysite222-16104.appspot.com",
-//   messagingSenderId: "794349238219",
-//   appId: "1:794349238219:web:652a5e3220933ef0a6684e",
-// };
+const firebaseConfig = {
+  apiKey: 'AIzaSyAglw9qEenZ6c7Zism7Psr1a6qnGjMalJE',
+  authDomain: 'mysite222-16104.firebaseapp.com',
+  projectId: 'mysite222-16104',
+  storageBucket: 'mysite222-16104.appspot.com',
+  messagingSenderId: '794349238219',
+  appId: '1:794349238219:web:652a5e3220933ef0a6684e',
+};
 
 // Initialize Firebase
-// export const firebaseApp = initializeApp(firebaseConfig);
+export const firebaseApp = initializeApp(firebaseConfig);
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       {/* <Head> 모든 페이지에서 카카오맵을 다운로드 받으므로 비효율적임
@@ -48,6 +48,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       </RecoilRoot>
     </>
   );
-}
+};
 
 export default MyApp;

@@ -1,9 +1,9 @@
-import styled from "@emotion/styled";
-import { useRouter } from "next/router";
-import { ReactNode } from "react";
-import LayoutBanner from "./banner";
-import LayoutHeader from "./header";
-import LayoutNavigation from "./navigation";
+import styled from '@emotion/styled';
+import { useRouter } from 'next/router';
+import { ReactNode } from 'react';
+import LayoutBanner from './banner';
+import LayoutHeader from './header';
+import LayoutNavigation from './navigation';
 
 const BodyWrapper = styled.div`
   display: flex;
@@ -20,13 +20,13 @@ const Body = styled.div``;
 //   background: orange;
 // `;
 
-const HIDDEN_HEADERS = ["/12-05-modal-refactoring"];
+const HIDDEN_HEADERS = ['/12-05-modal-refactoring'];
 
 interface ILayoutProps {
   children: ReactNode;
 }
 
-export default function Layout(props: ILayoutProps) {
+const Layout = (props: ILayoutProps) => {
   const router = useRouter();
 
   const isHidden = HIDDEN_HEADERS.includes(router.asPath);
@@ -42,4 +42,6 @@ export default function Layout(props: ILayoutProps) {
       </BodyWrapper>
     </>
   );
-}
+};
+
+export default Layout;

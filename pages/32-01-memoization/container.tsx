@@ -1,8 +1,8 @@
-import { useCallback, useMemo, useState } from "react";
-import MemoizationPresenterPage from "./presenter";
+import { useCallback, useMemo, useState } from 'react';
+import MemoizationPresenterPage from './presenter';
 
-export default function MemoizationContainerPage() {
-  console.log("컨테이너가 렌더링 됩니다!!!");
+const MemoizationContainerPage = () => {
+  console.log('컨테이너가 렌더링 됩니다!!!');
 
   let countLet = 0; // 이 숫자를 바뀌게 하고 싶지 않아요. === useMemo
   const [countState, setCountState] = useState(0);
@@ -73,4 +73,6 @@ export default function MemoizationContainerPage() {
       <MemoizationPresenterPage />
     </>
   );
-}
+};
+
+export default MemoizationContainerPage;

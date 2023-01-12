@@ -3,13 +3,13 @@
 // 동일한 함수인데 왜 use로 나눠서 관리를 하는가? === 가독성을 위해?
 
 // import {withAuth} from '../../src/components/commons/hooks/useAuth'
-import { useAuth } from "../../src/components/commons/hooks/useAuth";
+import { useAuth } from '../../src/components/commons/hooks/useAuth';
 
-function CustomHooksUseAuthPage() {
+const CustomHooksUseAuthPage = () => {
   // 네이밍은 페이지와 동일하게 했습니다.
   useAuth();
 
   return <div> 철수의 프로필 페이지입니다. </div>;
-}
+};
 
 export default CustomHooksUseAuthPage;

@@ -1,10 +1,7 @@
-import { useQuery, gql } from "@apollo/client";
-import styled from "@emotion/styled";
-import { ChangeEvent, useState } from "react";
-import {
-  IQuery,
-  IQueryFetchBoardsArgs,
-} from "../../src/commons/types/generated/types";
+import { useQuery, gql } from '@apollo/client';
+import styled from '@emotion/styled';
+import { ChangeEvent, useState } from 'react';
+import { IQuery, IQueryFetchBoardsArgs } from '../../src/commons/types/generated/types';
 
 const FETCH_BOARDS = gql`
   query fetchBoards($search: String, $page: Int) {
@@ -26,13 +23,10 @@ const MyColumn = styled.div`
   width: 25%;
 `;
 
-export default function MapBoardPage() {
-  const [mysearch, setMySearch] = useState("");
+const MapBoardPage = () => {
+  const [mysearch, setMySearch] = useState('');
 
-  const { data, refetch } = useQuery<
-    Pick<IQuery, "fetchBoards">,
-    IQueryFetchBoardsArgs
-  >(FETCH_BOARDS);
+  const { data, refetch } = useQuery<Pick<IQuery, 'fetchBoards'>, IQueryFetchBoardsArgs>(FETCH_BOARDS);
 
   const onChangeSearch = (event: ChangeEvent<HTMLInputElement>) => {
     setMySearch(event.target.value);
@@ -45,7 +39,7 @@ export default function MapBoardPage() {
   };
   return (
     <Wrapper>
-      검색어입력: <input type="text" onChange={onChangeSearch} />
+      검색어입력: <input type='text' onChange={onChangeSearch} />
       <button onClick={onClickSearch}>검색하기</button>
       {data?.fetchBoards.map((el: any) => (
         <MyRow key={el.id}>
@@ -60,4 +54,6 @@ export default function MapBoardPage() {
       ))}
     </Wrapper>
   );
-}
+};
+
+export default MapBoardPage;

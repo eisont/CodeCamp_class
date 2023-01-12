@@ -1,5 +1,5 @@
-import { useQuery, gql } from "@apollo/client";
-import { withAuth } from "../../src/components/commons/hocs/withAuth";
+import { useQuery, gql } from '@apollo/client';
+import { withAuth } from '../../src/components/commons/hocs/withAuth';
 // import { useRouter } from "next/router";
 // import { useEffect } from "react";
 
@@ -12,7 +12,7 @@ const FETCH_USER_LOGGED_IN = gql`
   }
 `;
 
-function LoginSuccessPage() {
+const LoginSuccessPage = () => {
   // const router = useRouter();
 
   const { data } = useQuery(FETCH_USER_LOGGED_IN);
@@ -28,7 +28,7 @@ function LoginSuccessPage() {
   // }, []);
 
   return <div>{data?.fetchUserLoggedIn.name}님 환영합니다!!!</div>;
-}
+};
 
 // withAuth로 감싸서 실행합니다.
 export default withAuth(LoginSuccessPage);

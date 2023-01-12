@@ -1,12 +1,9 @@
-import { useQuery, gql } from "@apollo/client";
-import styled from "@emotion/styled";
-import { ChangeEvent, useState } from "react";
-import {
-  IQuery,
-  IQueryFetchBoardsArgs,
-} from "../../src/commons/types/generated/types";
-import _ from "lodash";
-import { v4 as uuidv4 } from "uuid";
+import { useQuery, gql } from '@apollo/client';
+import styled from '@emotion/styled';
+import { ChangeEvent, useState } from 'react';
+import { IQuery, IQueryFetchBoardsArgs } from '../../src/commons/types/generated/types';
+import _ from 'lodash';
+import { v4 as uuidv4 } from 'uuid';
 
 const FETCH_BOARDS = gql`
   query fetchBoards($search: String, $page: Int) {
@@ -32,17 +29,14 @@ interface IProps {
 }
 
 const Word = styled.span`
-  color: ${(props: IProps) => (props.isMatched ? "red" : "black")};
+  color: ${(props: IProps) => (props.isMatched ? 'red' : 'black')};
 `;
 
-export default function MapBoardPage() {
+const MapBoardPage = () => {
   // const [mysearch, setMySearch] = useState("");
-  const [keyword, setKeyword] = useState("");
+  const [keyword, setKeyword] = useState('');
 
-  const { data, refetch } = useQuery<
-    Pick<IQuery, "fetchBoards">,
-    IQueryFetchBoardsArgs
-  >(FETCH_BOARDS);
+  const { data, refetch } = useQuery<Pick<IQuery, 'fetchBoards'>, IQueryFetchBoardsArgs>(FETCH_BOARDS);
 
   const getDeBounce = _.debounce((data) => {
     refetch({ search: data, page: 1 });
@@ -60,7 +54,7 @@ export default function MapBoardPage() {
   };
   return (
     <div>
-      검색어입력: <input type="text" onChange={onChangeSearch} />
+      검색어입력: <input type='text' onChange={onChangeSearch} />
       {/* <button onClick={onClickSearch}>검색하기</button> */}
       {data?.fetchBoards.map((el: any) => (
         <MyRow key={el._id}>
@@ -68,7 +62,7 @@ export default function MapBoardPage() {
           <MyColumn>
             {el.title
               .replaceAll(keyword, `#$%${keyword}#$%`)
-              .split("#$%")
+              .split('#$%')
               .map((el: any) => (
                 <Word key={uuidv4()} isMatched={keyword === el}>
                   {el}
@@ -84,4 +78,6 @@ export default function MapBoardPage() {
       ))}
     </div>
   );
-}
+};
+
+export default MapBoardPage;

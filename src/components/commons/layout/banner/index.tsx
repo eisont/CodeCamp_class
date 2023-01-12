@@ -1,10 +1,12 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
-export default function LayoutBanner() {
+const LayoutBanner = () => {
   const Wrapper = styled.div`
     height: 70px;
     background: green;
   `;
 
   return <Wrapper>Banner</Wrapper>;
-}
+};
+
+export default LayoutBanner;

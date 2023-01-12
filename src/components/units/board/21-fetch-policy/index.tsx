@@ -11,7 +11,12 @@ const FETCH_BOARDS = gql`
   }
 `;
 
-export default function FetchPolicyTest() {
+interface IEL {
+  _id: string;
+  title: string;
+}
+
+const FetchPolicyTest = () => {
   const { data } = useQuery(FETCH_BOARDS);
   // 내용을 변경하고 싶은 경우 밑에 코드처럼 추가하면 됩니다.
   // const { data } = useQuery(FETCH_BOARDS, {
@@ -20,9 +25,11 @@ export default function FetchPolicyTest() {
 
   return (
     <div>
-      {data?.fetchBoards?.map((el: any) => (
+      {data?.fetchBoards?.map((el: IEL) => (
         <div key={el._id}>{el.title}</div>
       ))}
     </div>
   );
-}
+};
+
+export default FetchPolicyTest;
