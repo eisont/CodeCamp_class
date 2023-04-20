@@ -63,14 +63,15 @@ const ApolloSetting = (props: any) => {
 
   // 로그인 권한분기
   // error함수에서 {}이거 실행시켜줘
+  // 토큰이 만료된 경우 새로운 토큰으로 변경시켜줘!!! restoreAcessToken을 사용해서
   const errorLink = onError(({ graphQLErrors, operation, forward }) => {
-    // 1-1. 에러를 캐치
+    // 1-1. api 실패시 graphQlErrors에서 에러를 캐치
     if (graphQLErrors) {
       for (const err of graphQLErrors) {
         // 1-2. 해당 에러가 토큰만료 에러인지 체크 === UNAUTHENTICATED
         if (err.extensions.code === 'UNAUTHENTICATED') {
           // 2-1. refreshToken으로 accessToken을 재발급 받기
-          // getAccessToken을 then해서 받아오기
+          // getAccessToken을 then해서 받아오기, return 값이 ()안으로 들어갑니다.
           getAccessToken().then((newAccessToken) => {
             // 2-2. 재발급 받은 accessToken 저장하기
             setAccessToken(newAccessToken);
@@ -79,20 +80,22 @@ const ApolloSetting = (props: any) => {
 
             // 3-1. 재발급 받은 accessToken으로 방금 실패한 쿼리 재요청하기 === forward하면 재요청 가능
             // operation.getContext().headers // api 에 작성되어있는 headers를 가지고 올수 있다.
-            // 기존 headers
-            // operation.getContext().headers
 
-            // operation.setContext() // headers 부분을 변경이 가능하다.
+            // operation.getContext().headers => 기존에 등록되어 있던 headers
+
+            // operation.setContext() // headers 부분을 변경이 가능하다. => setContext()는 기존의 Context를 조작할 수 있습니다.
+            // operation => 방금 실패했던 Query
             operation.setContext({
               headers: {
-                // 기존에 있는 것들은 그대로 두게 합니다.
+                // 기존에 header를 그대로 가지고 오고 Authorization만 변경합니다.
                 ...operation.getContext().headers,
                 Authorization: `Bearer ${newAccessToken}`, // accessToken만 바꿔치기
               },
             });
 
-            // 3-2. 변경된 operatrion 재요청하기
+            // 3-2. 변경된 operatrion 재요청하기 => 재요청된 header를 변경시켜줘!
             // operatrion === 실패한 토큰
+            // forward => 전송해줘
             return forward(operation);
           });
         }
@@ -103,7 +106,7 @@ const ApolloSetting = (props: any) => {
   // 4강, 19강
   // 이렇게 변수에 따로 담아서 넣는 방법으로 확장시킵니다.
   const uploadLink = createUploadLink({
-    uri: 'https://backend09.codebootcamp.co.kr/graphql',
+    uri: 'https://backend10.codebootcamp.co.kr/graphql',
     headers: { Authorization: `Bearer ${accessToken}` },
     // 중요한 정보를 포함 시킬것이냐? (include)
     // 이것을 해야 쿠키에 refreshToken이 들어갑니다.

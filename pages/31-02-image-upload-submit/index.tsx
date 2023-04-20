@@ -1,5 +1,6 @@
 // gql 임포트할때 apollo/client에서 했는지 graphql-request에서 임포트 했는지 확인해보세요. 둘 기능이 달라 오류 될 수 있습니다.
-import { useMutation, gql } from '@apollo/client';
+
+import { gql, useMutation } from '@apollo/client';
 import { ChangeEvent, useState } from 'react';
 import { IMutation, IMutationUploadFileArgs } from '../../src/commons/types/generated/types';
 
@@ -19,20 +20,17 @@ const UPLOAD_FILE = gql`
   }
 `;
 
-const ImageUploadPreviewPage = () => {
+const ImageUploadSubmitPage = () => {
   const [file1, setFile1] = useState<File>();
-
   const [imageUrl, setImageUrl] = useState('');
 
   const [uploadFile] = useMutation<Pick<IMutation, 'uploadFile'>, IMutationUploadFileArgs>(UPLOAD_FILE);
-  // createBoard === 리턴 값, IMutationCreateBoardArgs === 우리가 작성하는 name, writer 등등의 타입
   const [createBoard] = useMutation(CREATE_BOARD);
 
   const onChangeFile = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]; // file이 숫자였다. blob 형태로 만들어줍니다.?, 데이터베이스에 저장 가능한데 엄청난 data로 올라가기 때문에 직접 올리진 않고 미리보기 용도로만 사용하고 버릴겁니다.
-    // file이 없다면
+    const file = event.target.files?.[0];
     if (!file) {
-      alert('파일이 없습니다.');
+      alert('파일이 없습니다!');
       return;
     }
 
@@ -56,23 +54,23 @@ const ImageUploadPreviewPage = () => {
   };
 
   const onClickSubmit = async () => {
-    // uploadFile
-    // createBoard 함수를 한번에 묶겠습니다.
+    // uploadFile, crateBoard 함수를 한번에 묶겠습니다.
     const result1 = await uploadFile({ variables: { file: file1 } });
-    // 우리가 uploadFile 타입을 지정을 해서 undefined일 수도 있다. 라는 의미라 옵셔널 네이밍을 사용해서 없는 경우의 수도 지정해줍니다.
-    const imageUrl = result1.data?.uploadFile.url;
+    const imageUrl = result1.data?.uploadFile.url; // 우리가 uploadFile 타입을 지정을 해서 undefined일 수도 있다. 라는 의미라 옵셔널 네이밍을 사용해서 없는 경우의 수도 지정해줍니다.
+
     const result2 = await createBoard({
       variables: {
         createBoardInput: {
           writer: '영희',
           password: '1234',
-          title: '안녕하세요~',
-          contents: '이미지 업로드 입니다.',
+          title: '안녕',
+          contents: '이미지 업로드',
           images: [imageUrl],
         },
       },
     });
-    console.log(result2.data?.createBoard._id);
+
+    console.log(result2.data.createBoard._id);
   };
 
   return (
@@ -85,4 +83,4 @@ const ImageUploadPreviewPage = () => {
   );
 };
 
-export default ImageUploadPreviewPage;
+export default ImageUploadSubmitPage;

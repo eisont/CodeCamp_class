@@ -35,6 +35,7 @@ const WebEditorDetailPage = () => {
         ></div>
       ) : (
         <div style={{ color: 'blue' }}></div>
+        // hydration 이슈를 해결하기 위한 코드, 프리렌더링 때 코드
       )}
       <div style={{ color: 'brown' }}>상품가격: </div>
     </>

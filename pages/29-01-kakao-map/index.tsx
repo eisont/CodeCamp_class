@@ -1,12 +1,11 @@
+import Head from 'next/head';
 import Script from 'next/script';
 import { useEffect } from 'react';
 // Head에 집어넣게 되면 html head 부분에 들어가게 되고, 먼저 실행
 // import Script from "next/script";
 // Script 부분에 넣으면 html script 부분에 들어갑니다. body에 들어가서 나중에 실행
 
-declare const window: typeof globalThis & {
-  kakao: any;
-};
+declare const window: typeof globalThis & { kakao: any }; // kakao를 찾겠끔 만든다.
 
 const KakaoMapPage = () => {
   useEffect(() => {
@@ -19,14 +18,18 @@ const KakaoMapPage = () => {
       level: 3, // 지도의 레벨(확대, 축소 정도)
     };
 
-    // 담지 않아도 되는데 map에 담은 이유는 나중에 map을 가지고 스타일 등등을 관리하기 위해 담아놓겠습니다.
     const map = new window.kakao.maps.Map(container, options); // 지도 생성 및 객체 리턴
+
+    // 담지 않아도 되는데 map에 담은 이유는 나중에 map을 가지고 스타일 등등을 관리하기 위해 담아놓겠습니다.
   }, []);
+
   return (
-    <>
-      <Script type='text/javascript' src='//dapi.kakao.com/v2/maps/sdk.js?appkey=5c7f2a4ed139b34fb703d663cc6f45a2' />
+    <div>
+      <Head>
+        <script type='text/javascript' src='//dapi.kakao.com/v2/maps/sdk.js?appkey=5c7f2a4ed139b34fb703d663cc6f45a2'></script>
+      </Head>
       <div id='map' style={{ width: 500, height: 400 }}></div>
-    </>
+    </div>
   );
 };
 

@@ -4,9 +4,7 @@ import { useEffect } from 'react';
 // import Script from "next/script";
 // Script 부분에 넣으면 html script 부분에 들어갑니다. body에 들어가서 나중에 실행
 
-declare const window: typeof globalThis & {
-  kakao: any;
-};
+declare const window: typeof globalThis & { kakao: any };
 
 const KakaoMapPage = () => {
   useEffect(() => {

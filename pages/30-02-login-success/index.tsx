@@ -10,8 +10,8 @@ const FETCH_USER_LOGGED_IN = gql`
 `;
 
 const LoginSuccessPage = () => {
+  // 인가 과정
   const { data } = useQuery(FETCH_USER_LOGGED_IN);
-  console.log(data);
 
   return <div>{data?.fetchUserLoggedIn.name}님 환영합니다!!!</div>;
 };

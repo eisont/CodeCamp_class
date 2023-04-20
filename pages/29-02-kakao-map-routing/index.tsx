@@ -13,9 +13,11 @@ const KakaoMapPage = () => {
 
   return (
     <>
+      {/* 클라이언트 사이드 렌더링 */}
       <button onClick={onClickMoveToMap}>맵으로 이동하기!!!</button>
       {/* Link === router.push와 동일한 기능을 합니다. 태그로 사용하는 것입니다. */}
       {/* router.push가 좋을까? link 태그가 더 좋을까? */}
+      {/* 클라이언트 사이드 렌더링 */}
       <Link href='/29-03-kakao-map-routed'>
         <a>맵으로 이동하기!!!</a>
         {/* 여기서 a태그는 보여주기 식입니다. a태그처럼 보여줘~라는 의미? */}

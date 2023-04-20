@@ -33,8 +33,10 @@ const WebEditorDetailPage = () => {
         <div
           dangerouslySetInnerHTML={{
             __html: Dompurify.sanitize(data?.fetchBoard.contents),
+            // Cross-Site-Script(=XSS) 해킹을 막기 위해 Dumpurify를 사용
+            // Dompurify를 사용한 이유는 웹에디터를 사용해 js를 사용할 수 있는 것을 막는 역할
           }}
-        ></div>
+        />
       )}
     </>
   );

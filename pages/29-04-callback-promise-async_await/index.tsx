@@ -10,33 +10,31 @@ const CallbackPromiseAsyncAwaitPage = () => {
 
     aaa.addEventListener(
       'load',
-      (res) => {
+      (res: any) => {
         // res === response
-        console.log(res);
         const num = res.target.response.split(' ')[0]; // 131 (랜덤숫자)
 
         const bbb = new XMLHttpRequest();
-        bbb.open('get', `https://koreanjson.com/${num}`);
+        bbb.open('get', `https://koreanjson.com/posts/${num}`);
         bbb.send(); // bbb가 다 들어오게 되면
 
-        bbb.addEventListener('load', (res) => {
-          const userId = res.target.response.UserId;
-
+        bbb.addEventListener('load', (res: any) => {
+          const userId = res.target.response.split(':').pop().split('}').shift();
           const ccc = new XMLHttpRequest();
           ccc.open('get', `https://koreanjson.com/posts?userId=${userId}`);
           ccc.send();
           ccc.addEventListener('load', (res) => {
-            console.log(res); // 최종 결과값!!!
+            console.log('res', res); // 최종 결과값!!!
           });
         });
       } // callback 함수입니다.
     ); // 응답이 왔을 때
   };
 
-  // new Promise().then().catch()
-  // promise를 설명할때 보통 .then이라고 설명합니다.
+  // ================================Promise================================
+  // new Promise().then().catch() // promise를 설명할때 보통 .then이라고 설명합니다.
   //   new Promise((resolve, reject) => {
-  //     // 외부에 요청을 할때?
+  //     // 외부에 요청을 할때? 시간이 걸리는 작업을 할때?
 
   //     // 외부 요청 코드
   //     const ccc = new XMLHttpRequest();
@@ -52,13 +50,13 @@ const CallbackPromiseAsyncAwaitPage = () => {
   //     // 실패??
   //     reject("error message");
   //   })
-  //     .then((res) => {})
-  //     .catch((err) => {});
+  //     .then((res) => {}).catch((err) => {});   // 위에서 발생한 error는 catch으로 들어갑니다.
   // }
+  // ================================Promise================================
 
   const onClickPromise = () => {
+    // 시간이 걸리는 작업에 대해서 promise를 사용합니다. / axios도 promise로 만들어진 것입니다.
     console.log('여기는 1번입니다.');
-    // 이렇게 밑으로 쭉쭉 내려가는 방식을 promise Chain이라고 합니다.
     axios
       .get('http://numbersapi.com/random?min=1&max=200')
       .then((res) => {
@@ -74,7 +72,8 @@ const CallbackPromiseAsyncAwaitPage = () => {
       .then((res) => {
         console.log('여기는 4번입니다.');
         console.log(res);
-      });
+      }); //callback하고 달라보이지 않는데? 그럼 장점은 무엇이냐?
+    // .then으로 하면 다음 .then으로 연결이 됩니다. 이렇게 밑으로 쭉쭉 내려가는 방식을 promise Chain이라고 합니다.
     console.log('여기는 5번입니다.');
     // 결과는 1,5,2,3,4 순으로 진행됩니다. 이렇게 순서대로 되지 않아 실수를 많이 일으킵니다.
     // 하지만 async/await를 사용할 경우 순서대로 진행이 되기 때문에 실수가 적어집니다.

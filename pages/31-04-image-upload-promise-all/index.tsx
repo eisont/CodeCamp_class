@@ -62,46 +62,7 @@ const ImageUploadPreviewPage = () => {
   };
 
   const onClickSubmit = async () => {
-    try {
-      const results = await Promise.all(files.map((el) => el && uploadFile({ variables: { file: el } })));
-      // promise.all로 해서 보다 효율적이게 바꿨습니다.
-
-      const resultUrls = results.map((el) => (el?.data ? el?.data.uploadFile.url : ''));
-      // {return el?.data.uploadFile.url;}
-      // url이 없는게 있을 수옫 있어요.
-
-      // 근데 굉장히 더럽습니다. 언뜻 보기에 삼항연산자가 생각나요!!!
-      // return el && uploadFile({ variables: { file: el} })
-      // return el ? uploadFile({ variables: { file: el} }) : undefined
-
-      // files.map((el)=> { // el === file
-      //   // file이 있을수도 있고 undefined 일수 있습니다.
-      //   if (el) { // el이 있으면 실행해줘
-      //     return uploadFile({ variables: { file: el } });
-      //   } else { // undefine이면 이거 실행해줘
-      //     return undefined
-      //   }
-      // })
-
-      // await uploadFile({ variables: { file: files[0] } });
-      // await uploadFile({ variables: { file: files[1] } });
-      // await uploadFile({ variables: { file: files[2] } });
-
-      const result2 = await createBoard({
-        variables: {
-          createBoardInput: {
-            writer: '영희',
-            password: '1234',
-            title: '안녕하세요~',
-            contents: '이미지 업로드 입니다.',
-            images: resultUrls,
-          },
-        },
-      });
-      console.log(result2.data?.createBoard._id);
-    } catch (error: any) {
-      alert(error.message);
-    }
+    const result = await uploadFile({ variables: { file: file1 } });
   };
 
   return (

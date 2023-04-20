@@ -6,7 +6,7 @@ const OpenGraphPage = () => {
       <Head>
         {/* meta === 내 사이트를 알릴때 사용하는 태그입니다. */}
         {/* content = 내 사이트 설명 */}
-        {/* og = opengraph */}
+        {/* og = opengraph (페이스북에서 만듬), twitter (트위터에서 만듬) */}
         {/* 제공해주는 입장, 다른 프로그램을 사용할때 어떤것을 보여주게 할것인가? 하는 부분 */}
         <meta property='og:title' content='나만의 사이트' />
         <meta property='og:description' content='나만의 사이트에 오신것을 환영합니다.' />
